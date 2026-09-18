@@ -71,6 +71,10 @@ html_code = r'''<!DOCTYPE html>
             scroll-behavior: smooth;
         }
 
+        section[id] {
+            scroll-margin-top: 76px;
+        }
+
         body {
             margin: 0;
             font-family: "Inter", sans-serif;
@@ -740,6 +744,10 @@ html_code = r'''<!DOCTYPE html>
         }
 
         @media (max-width: 760px) {
+            section[id] {
+                scroll-margin-top: 67px;
+            }
+
             .container {
                 width: calc(100% - 28px);
             }
@@ -1416,6 +1424,54 @@ html_code = r'''<!DOCTYPE html>
     </footer>
 
     <script>
+        /*
+        =====================================================
+        NAVIGASI HALAMAN DI DALAM STREAMLIT
+        =====================================================
+
+        Tautan dengan awalan # ditangani secara langsung agar
+        tetap dapat berpindah bagian walaupun website berada
+        di dalam iframe Streamlit.
+        */
+        function menujuBagian(idTujuan) {
+            const bagian = document.querySelector(idTujuan);
+
+            if (!bagian) {
+                return;
+            }
+
+            bagian.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const tautanNavigasi =
+                document.querySelectorAll('a[href^="#"]');
+
+            tautanNavigasi.forEach(function (tautan) {
+                tautan.addEventListener("click", function (event) {
+                    const idTujuan = tautan.getAttribute("href");
+
+                    if (!idTujuan || idTujuan === "#") {
+                        return;
+                    }
+
+                    event.preventDefault();
+                    menujuBagian(idTujuan);
+
+                    if (window.history && window.history.replaceState) {
+                        try {
+                            window.history.replaceState(null, "", idTujuan);
+                        } catch (error) {
+                            /* Iframe Streamlit dapat membatasi perubahan URL. */
+                        }
+                    }
+                });
+            });
+        });
+
         /*
         =====================================================
         KONFIGURASI NOMOR WHATSAPP
