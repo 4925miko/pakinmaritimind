@@ -20,9 +20,17 @@ st.markdown(
             max-width: 100%;
             padding: 0;
         }
+        [data-testid="stAppViewContainer"],
+        [data-testid="stMain"],
+        .stMainBlockContainer {
+            max-width: 100%;
+            padding: 0;
+        }
         iframe {
             display: block;
             width: 100%;
+            max-width: 100%;
+            border: 0;
         }
     </style>
     """,
@@ -68,6 +76,7 @@ html_code = r'''<!DOCTYPE html>
             font-family: "Inter", sans-serif;
             color: var(--text);
             background: #f6fbff;
+            overflow-x: hidden;
         }
 
         h1,
@@ -732,29 +741,76 @@ html_code = r'''<!DOCTYPE html>
 
         @media (max-width: 760px) {
             .container {
-                width: min(100% - 32px, 1180px);
+                width: calc(100% - 28px);
             }
 
             .nav-content {
                 min-height: 67px;
+                gap: 10px;
             }
 
             .nav-links {
+                display: flex;
+                gap: 0;
+            }
+
+            .nav-links a:not(.nav-button) {
                 display: none;
+            }
+
+            .nav-button {
+                padding: 9px 13px;
+                font-size: 12px !important;
+            }
+
+            .brand {
+                gap: 8px;
+                font-size: 14px;
+            }
+
+            .brand-icon {
+                width: 36px;
+                height: 36px;
+                border-radius: 11px;
+                font-size: 18px;
             }
 
             .hero {
                 min-height: auto;
-                padding: 100px 0 80px;
+                padding: 90px 0 60px;
             }
 
             .hero-grid {
-                padding-top: 25px;
+                padding-top: 15px;
+                gap: 35px;
             }
 
             .hero h1 {
-                font-size: 42px;
-                letter-spacing: -1.5px;
+                font-size: clamp(34px, 11vw, 42px);
+                line-height: 1.08;
+                letter-spacing: -1.2px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+                line-height: 1.7;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .featured-card {
+                width: 100%;
+                border-radius: 20px;
+            }
+
+            .featured-card img {
+                height: 220px;
             }
 
             .stats {
@@ -762,7 +818,7 @@ html_code = r'''<!DOCTYPE html>
             }
 
             .section {
-                padding: 70px 0;
+                padding: 58px 0;
             }
 
             .section-header {
@@ -773,9 +829,22 @@ html_code = r'''<!DOCTYPE html>
                 margin-top: 15px;
             }
 
+            .section-title {
+                font-size: 30px;
+                letter-spacing: -0.8px;
+            }
+
             .product-grid,
             .feature-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .product-image {
+                height: 225px;
+            }
+
+            .product-content p {
+                min-height: auto;
             }
 
             .about-list {
@@ -788,12 +857,69 @@ html_code = r'''<!DOCTYPE html>
 
             .order-info,
             .order-form {
-                padding: 24px;
+                padding: 21px;
+            }
+
+            .order-box {
+                padding: 7px;
+                gap: 8px;
+                border-radius: 20px;
+            }
+
+            .order-info {
+                border-radius: 16px;
+            }
+
+            .order-info h2 {
+                font-size: 27px;
+            }
+
+            .field input,
+            .field select,
+            .field textarea {
+                font-size: 16px;
             }
 
             .footer-content {
                 flex-direction: column;
                 align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .container {
+                width: calc(100% - 22px);
+            }
+
+            .brand {
+                font-size: 12px;
+            }
+
+            .nav-button {
+                padding: 8px 10px;
+                font-size: 11px !important;
+            }
+
+            .eyebrow {
+                font-size: 10px;
+                letter-spacing: 0.1em;
+            }
+
+            .hero h1 {
+                font-size: 33px;
+            }
+
+            .section-title {
+                font-size: 27px;
+            }
+
+            .about-image {
+                height: 250px;
+            }
+
+            .order-info,
+            .order-form {
+                padding: 18px;
             }
         }
     </style>
@@ -1378,7 +1504,7 @@ Catatan: ${isiCatatan}`;
 
 components.html(
     html_code,
-    height=5200,
-    scrolling=False,
+    height=900,
+    scrolling=True,
 )
 
