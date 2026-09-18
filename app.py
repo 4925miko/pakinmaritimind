@@ -170,6 +170,21 @@ html_code = r'''<!DOCTYPE html>
             border-radius: 999px;
         }
 
+        .mobile-menu-toggle {
+            width: 42px;
+            height: 42px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            background: var(--blue);
+            border: 0;
+            border-radius: 12px;
+            font-size: 23px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
         /* HERO */
         .hero {
             min-height: 790px;
@@ -758,17 +773,45 @@ html_code = r'''<!DOCTYPE html>
             }
 
             .nav-links {
-                display: flex;
-                gap: 0;
+                position: absolute;
+                top: calc(100% + 8px);
+                right: 0;
+                left: 0;
+                display: none;
+                padding: 12px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 5px;
+                background: rgba(3, 25, 35, 0.98);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                border-radius: 16px;
+                box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
             }
 
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a,
             .nav-links a:not(.nav-button) {
-                display: none;
+                display: block;
+                padding: 12px 14px;
+                border-radius: 10px;
+                font-size: 13px;
+            }
+
+            .nav-links a:hover {
+                background: rgba(255, 255, 255, 0.08);
             }
 
             .nav-button {
-                padding: 9px 13px;
+                padding: 12px 14px;
                 font-size: 12px !important;
+                text-align: center;
+            }
+
+            .mobile-menu-toggle {
+                display: inline-flex;
             }
 
             .brand {
@@ -943,7 +986,17 @@ html_code = r'''<!DOCTYPE html>
                 PAKINMARITIMIND
             </a>
 
-            <nav class="nav-links">
+            <button
+                type="button"
+                class="mobile-menu-toggle"
+                aria-label="Buka menu navigasi"
+                aria-expanded="false"
+                aria-controls="menuNavigasi"
+            >
+                ☰
+            </button>
+
+            <nav class="nav-links" id="menuNavigasi">
                 <a href="#beranda">Beranda</a>
                 <a href="#produk">Produk</a>
                 <a href="#tentang">Tentang Kami</a>
@@ -1450,6 +1503,44 @@ html_code = r'''<!DOCTYPE html>
             const tautanNavigasi =
                 document.querySelectorAll('a[href^="#"]');
 
+            const tombolMenu =
+                document.querySelector(".mobile-menu-toggle");
+
+            const menuNavigasi =
+                document.getElementById("menuNavigasi");
+
+            function tutupMenuMobile() {
+                if (!tombolMenu || !menuNavigasi) {
+                    return;
+                }
+
+                menuNavigasi.classList.remove("open");
+                tombolMenu.setAttribute("aria-expanded", "false");
+                tombolMenu.setAttribute("aria-label", "Buka menu navigasi");
+                tombolMenu.textContent = "☰";
+            }
+
+            if (tombolMenu && menuNavigasi) {
+                tombolMenu.addEventListener("click", function () {
+                    const menuTerbuka =
+                        menuNavigasi.classList.toggle("open");
+
+                    tombolMenu.setAttribute(
+                        "aria-expanded",
+                        menuTerbuka ? "true" : "false"
+                    );
+
+                    tombolMenu.setAttribute(
+                        "aria-label",
+                        menuTerbuka
+                            ? "Tutup menu navigasi"
+                            : "Buka menu navigasi"
+                    );
+
+                    tombolMenu.textContent = menuTerbuka ? "×" : "☰";
+                });
+            }
+
             tautanNavigasi.forEach(function (tautan) {
                 tautan.addEventListener("click", function (event) {
                     const idTujuan = tautan.getAttribute("href");
@@ -1460,6 +1551,7 @@ html_code = r'''<!DOCTYPE html>
 
                     event.preventDefault();
                     menujuBagian(idTujuan);
+                    tutupMenuMobile();
 
                     if (window.history && window.history.replaceState) {
                         try {
@@ -1469,6 +1561,12 @@ html_code = r'''<!DOCTYPE html>
                         }
                     }
                 });
+            });
+
+            window.addEventListener("resize", function () {
+                if (window.innerWidth > 760) {
+                    tutupMenuMobile();
+                }
             });
         });
 
