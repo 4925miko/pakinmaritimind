@@ -46,25 +46,84 @@ st.markdown(
 # produk1.jpg sampai produk10.jpg. Nama file dapat diubah pada
 # daftar_gambar yang berada di bagian bawah kode.
 def baca_gambar(nama_file):
-    lokasi = Path(__file__).parent / "images" / nama_file
+    folder_gambar = Path(__file__).parent / "images"
+    lokasi = folder_gambar / nama_file
 
+    # Normalisasi nama: abaikan kapital, spasi, tanda hubung, dan ekstensi
+    def normalisasi(nama):
+        nama_tanpa_ekstensi = Path(nama).stem
+        return "".join(
+            karakter.lower()
+            for karakter in nama_tanpa_ekstensi
+            if karakter.isalnum()
+        )
+
+    # Jika nama persis tidak ditemukan, cari nama yang mirip
+    if not lokasi.exists() and folder_gambar.exists():
+        nama_dicari = normalisasi(nama_file)
+
+        for file_gambar in folder_gambar.iterdir():
+            if file_gambar.is_file():
+                if normalisasi(file_gambar.name) == nama_dicari:
+                    lokasi = file_gambar
+                    break
+
+    # Gambar cadangan jika file benar-benar tidak ditemukan
     if not lokasi.exists():
-        # Gambar cadangan agar website tetap dapat dibuka ketika foto belum ada.
-        svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600">
-        <rect width="100%" height="100%" fill="#eefaff"/>
-        <text x="50%" y="48%" text-anchor="middle" fill="#2396c4"
-              font-family="Arial" font-size="34" font-weight="bold">Foto belum tersedia</text>
-        <text x="50%" y="57%" text-anchor="middle" fill="#698b9b"
-              font-family="Arial" font-size="22">{nama_file}</text>
-        </svg>'''
-        data = base64.b64encode(svg.encode("utf-8")).decode("utf-8")
+        svg = f'''
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="900"
+             height="600">
+
+            <rect width="100%"
+                  height="100%"
+                  fill="#eefaff"/>
+
+            <text x="50%"
+                  y="48%"
+                  text-anchor="middle"
+                  fill="#2396c4"
+                  font-family="Arial"
+                  font-size="34"
+                  font-weight="bold">
+                Foto belum tersedia
+            </text>
+
+            <text x="50%"
+                  y="57%"
+                  text-anchor="middle"
+                  fill="#698b9b"
+                  font-family="Arial"
+                  font-size="22">
+                {nama_file}
+            </text>
+        </svg>
+        '''
+
+        data = base64.b64encode(
+            svg.encode("utf-8")
+        ).decode("utf-8")
+
         return f"data:image/svg+xml;base64,{data}"
 
     tipe, _ = mimetypes.guess_type(lokasi)
-    tipe = tipe or "image/jpeg"
+
+    # Deteksi tipe gambar berdasarkan ekstensi
+    ekstensi = lokasi.suffix.lower()
+
+    if ekstensi in [".jpg", ".jpeg"]:
+        tipe = "image/jpeg"
+    elif ekstensi == ".png":
+        tipe = "image/png"
+    elif ekstensi == ".webp":
+        tipe = "image/webp"
+    else:
+        tipe = tipe or "image/jpeg"
 
     with open(lokasi, "rb") as file:
-        data = base64.b64encode(file.read()).decode("utf-8")
+        data = base64.b64encode(
+            file.read()
+        ).decode("utf-8")
 
     return f"data:{tipe};base64,{data}"
 
