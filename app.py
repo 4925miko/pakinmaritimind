@@ -227,14 +227,24 @@ html_code = r'''<!DOCTYPE html>
         }
 
         .brand-icon {
-            width: 42px;
-            height: 42px;
-            display: grid;
-            place-items: center;
-            border-radius: 14px;
-            background: linear-gradient(135deg, var(--cyan), var(--blue));
-            font-size: 21px;
-        }
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px;
+    border-radius: 14px;
+    color: var(--white);
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    box-shadow: 0 8px 20px rgba(36, 127, 159, 0.22);
+}
+
+.brand-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
 
         .nav-links {
             display: flex;
@@ -1072,7 +1082,25 @@ html_code = r'''<!DOCTYPE html>
     <header class="navbar">
         <div class="container nav-content">
             <a href="#beranda" class="brand">
-                <span class="brand-icon">NBA</span>
+                <span class="brand-icon" aria-label="Logo Nuha Berkah Abadi">
+    <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path
+            d="M13 32c9-12 23-16 35-7l9-7v28l-9-7c-12 9-26 5-35-7Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="4"
+            stroke-linejoin="round"
+        />
+        <circle cx="39" cy="28" r="2.5" fill="currentColor"/>
+        <path
+            d="M8 48c10-5 18 5 28 0s18 5 24 0"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="4"
+            stroke-linecap="round"
+        />
+    </svg>
+</span>
                 PT NUHA BERKAH ABADI
             </a>
 
@@ -1445,8 +1473,8 @@ html_code = r'''<!DOCTYPE html>
 
             <img
                 class="about-image"
-                src="https://images.unsplash.com/photo-1535400255456-984241443b1f?auto=format&fit=crop&w=1200&q=85"
-                alt="Seafood berkualitas"
+                src="GAMBAR_PRODUK_10"
+                alt="Seafood dan fillet frozen PT Nuha Berkah Abadi"
             >
         </div>
     </section>
