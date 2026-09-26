@@ -1739,7 +1739,7 @@ daftar_gambar = {
     "GAMBAR_PRODUK_7": "produk7.JPG",
     "GAMBAR_PRODUK_8": "produk8.JPG",
     "GAMBAR_PRODUK_9": "produk9.JPG",
-    "GAMBAR_PRODUK_10": "produk10.JPG",
+    "GAMBAR_PRODUK_10": "produk10baru.JPG",
 }
 
 for penanda, nama_file in daftar_gambar.items():
