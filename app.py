@@ -1,5 +1,8 @@
 import streamlit as st
 import streamlit.components.v1 as components
+import base64
+import mimetypes
+from pathlib import Path
 
 st.set_page_config(
     page_title="PakinMaritimInd",
@@ -37,6 +40,34 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+
+# FOTO PRODUK
+# Buat folder bernama "images" di samping file ini, lalu masukkan
+# produk1.jpg sampai produk10.jpg. Nama file dapat diubah pada
+# daftar_gambar yang berada di bagian bawah kode.
+def baca_gambar(nama_file):
+    lokasi = Path(__file__).parent / "images" / nama_file
+
+    if not lokasi.exists():
+        # Gambar cadangan agar website tetap dapat dibuka ketika foto belum ada.
+        svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600">
+        <rect width="100%" height="100%" fill="#eefaff"/>
+        <text x="50%" y="48%" text-anchor="middle" fill="#2396c4"
+              font-family="Arial" font-size="34" font-weight="bold">Foto belum tersedia</text>
+        <text x="50%" y="57%" text-anchor="middle" fill="#698b9b"
+              font-family="Arial" font-size="22">{nama_file}</text>
+        </svg>'''
+        data = base64.b64encode(svg.encode("utf-8")).decode("utf-8")
+        return f"data:image/svg+xml;base64,{data}"
+
+    tipe, _ = mimetypes.guess_type(lokasi)
+    tipe = tipe or "image/jpeg"
+
+    with open(lokasi, "rb") as file:
+        data = base64.b64encode(file.read()).decode("utf-8")
+
+    return f"data:{tipe};base64,{data}"
+
 # Seluruh tampilan website HTML ditanam langsung di dalam aplikasi Streamlit.
 html_code = r'''<!DOCTYPE html>
 <html lang="id">
@@ -52,15 +83,15 @@ html_code = r'''<!DOCTYPE html>
 
     <style>
         :root {
-            --navy: #062436;
-            --dark: #031923;
-            --blue: #087fbd;
-            --cyan: #20bce1;
-            --light-blue: #eaf8ff;
+            --navy: #176b87;
+            --dark: #125b75;
+            --blue: #2396c4;
+            --cyan: #54cbe8;
+            --light-blue: #eefaff;
             --white: #ffffff;
-            --text: #102a43;
-            --muted: #667f91;
-            --border: #dcecf5;
+            --text: #173f52;
+            --muted: #698b9b;
+            --border: #d9edf5;
         }
 
         * {
@@ -79,7 +110,7 @@ html_code = r'''<!DOCTYPE html>
             margin: 0;
             font-family: "Inter", sans-serif;
             color: var(--text);
-            background: #f6fbff;
+            background: #f8fdff;
             overflow-x: hidden;
         }
 
@@ -114,7 +145,7 @@ html_code = r'''<!DOCTYPE html>
             right: 0;
             left: 0;
             z-index: 100;
-            background: rgba(3, 25, 35, 0.88);
+            background: rgba(28, 112, 142, 0.92);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(14px);
         }
@@ -195,9 +226,9 @@ html_code = r'''<!DOCTYPE html>
             background:
                 linear-gradient(
                     105deg,
-                    rgba(2, 20, 31, 0.96) 0%,
-                    rgba(4, 43, 61, 0.82) 52%,
-                    rgba(4, 43, 61, 0.35) 100%
+                    rgba(18, 91, 117, 0.90) 0%,
+                    rgba(30, 126, 157, 0.72) 52%,
+                    rgba(65, 170, 198, 0.28) 100%
                 ),
                 url("https://images.unsplash.com/photo-1544943910-4c1dc44aab44?auto=format&fit=crop&w=2000&q=85")
                 center/cover no-repeat;
@@ -210,7 +241,7 @@ html_code = r'''<!DOCTYPE html>
             bottom: 0;
             left: 0;
             height: 150px;
-            background: linear-gradient(transparent, var(--dark));
+            background: linear-gradient(transparent, rgba(18, 91, 117, 0.82));
         }
 
         .hero-grid {
@@ -407,7 +438,7 @@ html_code = r'''<!DOCTYPE html>
         .products {
             background:
                 radial-gradient(circle at 15% 10%, rgba(32, 188, 225, 0.1), transparent 27%),
-                #f6fbff;
+                #f8fdff;
         }
 
         .product-grid {
@@ -497,7 +528,7 @@ html_code = r'''<!DOCTYPE html>
         /* ABOUT */
         .about {
             color: white;
-            background: linear-gradient(120deg, #05283a, #073a50 55%, #075d7e);
+            background: linear-gradient(120deg, #2c8fac, #3ba8c3 55%, #62bfd3);
         }
 
         .about-grid {
@@ -598,7 +629,7 @@ html_code = r'''<!DOCTYPE html>
 
         /* ORDER */
         .order {
-            background: #eef9ff;
+            background: #f0fbff;
         }
 
         .order-box {
@@ -616,7 +647,7 @@ html_code = r'''<!DOCTYPE html>
             padding: 35px;
             color: white;
             border-radius: 20px;
-            background: linear-gradient(150deg, #06344b, #087cac);
+            background: linear-gradient(150deg, #2b91af, #53b9d1);
         }
 
         .order-info h2 {
@@ -782,7 +813,7 @@ html_code = r'''<!DOCTYPE html>
                 flex-direction: column;
                 align-items: stretch;
                 gap: 5px;
-                background: rgba(3, 25, 35, 0.98);
+                background: rgba(28, 112, 142, 0.98);
                 border: 1px solid rgba(255, 255, 255, 0.12);
                 border-radius: 16px;
                 box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
@@ -1043,7 +1074,7 @@ html_code = r'''<!DOCTYPE html>
 
                 <div class="stats">
                     <div class="stat">
-                        <strong>8+</strong>
+                        <strong>10</strong>
                         <span>Pilihan produk seafood</span>
                     </div>
 
@@ -1061,7 +1092,7 @@ html_code = r'''<!DOCTYPE html>
 
             <div class="featured-card">
                 <img
-                    src="https://images.unsplash.com/photo-1565680018093-ebb6a9e8c6e0?auto=format&fit=crop&w=1000&q=85"
+                    src="GAMBAR_PRODUK_1"
                     alt="Udang Vaname"
                 >
 
@@ -1097,7 +1128,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="https://images.unsplash.com/photo-1565680018093-ebb6a9e8c6e0?auto=format&fit=crop&w=900&q=85"
+                            src="GAMBAR_PRODUK_1"
                             alt="Udang Vaname"
                         >
                         <span class="badge">FAVORIT</span>
@@ -1116,7 +1147,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=85"
+                            src="GAMBAR_PRODUK_2"
                             alt="Cumi Segar"
                         >
                         <span class="badge">FRESH</span>
@@ -1135,7 +1166,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=900&q=85"
+                            src="GAMBAR_PRODUK_3"
                             alt="Fillet Salmon"
                         >
                         <span class="badge">PREMIUM</span>
@@ -1154,7 +1185,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="https://images.unsplash.com/photo-1534482421-64566f976cfa?auto=format&fit=crop&w=900&q=85"
+                            src="GAMBAR_PRODUK_4"
                             alt="Kerang Hijau"
                         >
                         <span class="badge">SEGAR</span>
@@ -1173,7 +1204,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=900&q=85"
+                            src="GAMBAR_PRODUK_5"
                             alt="Kepiting Bakau"
                         >
                         <span class="badge">PREMIUM</span>
@@ -1192,7 +1223,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=900&q=85"
+                            src="GAMBAR_PRODUK_6"
                             alt="Fillet Dori"
                         >
                         <span class="badge">PRAKTIS</span>
@@ -1211,7 +1242,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="https://images.unsplash.com/photo-1588168333986-5078d3ae3976?auto=format&fit=crop&w=900&q=85"
+                            src="GAMBAR_PRODUK_7"
                             alt="Tiram Segar"
                         >
                         <span class="badge">SEGAR</span>
@@ -1230,7 +1261,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="https://images.unsplash.com/photo-1566847438217-76e82d383f84?auto=format&fit=crop&w=900&q=85"
+                            src="GAMBAR_PRODUK_8"
                             alt="Seafood Mix"
                         >
                         <span class="badge">PAKET</span>
@@ -1242,6 +1273,44 @@ html_code = r'''<!DOCTYPE html>
                         <p>
                             Kombinasi seafood pilihan untuk steamboat, hotpot,
                             grill, dan menu keluarga.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- PRODUK 9: ubah nama, kategori, badge, dan keterangannya -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <img
+                            src="GAMBAR_PRODUK_9"
+                            alt="Nama Produk 9"
+                        >
+                        <span class="badge">SEGAR</span>
+                    </div>
+
+                    <div class="product-content">
+                        <span class="product-category">Kategori Produk</span>
+                        <h3>Nama Produk 9</h3>
+                        <p>
+                            Tuliskan keterangan produk ke-9 di bagian ini.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- PRODUK 10: ubah nama, kategori, badge, dan keterangannya -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <img
+                            src="GAMBAR_PRODUK_10"
+                            alt="Nama Produk 10"
+                        >
+                        <span class="badge">PREMIUM</span>
+                    </div>
+
+                    <div class="product-content">
+                        <span class="product-category">Kategori Produk</span>
+                        <h3>Nama Produk 10</h3>
+                        <p>
+                            Tuliskan keterangan produk ke-10 di bagian ini.
                         </p>
                     </div>
                 </article>
@@ -1422,6 +1491,8 @@ html_code = r'''<!DOCTYPE html>
                                 <option value="Fillet Dori">Fillet Dori</option>
                                 <option value="Tiram Segar">Tiram Segar</option>
                                 <option value="Seafood Mix">Seafood Mix</option>
+                                <option value="Nama Produk 9">Nama Produk 9</option>
+                                <option value="Nama Produk 10">Nama Produk 10</option>
                             </select>
                         </div>
 
@@ -1655,6 +1726,24 @@ Catatan: ${isiCatatan}`;
 </body>
 </html>
 '''
+
+# Hubungkan setiap penanda foto di HTML dengan file di dalam folder images.
+# Jika nama foto Anda berbeda, cukup ubah bagian kanan saja.
+daftar_gambar = {
+    "GAMBAR_PRODUK_1": "produk1.jpg",
+    "GAMBAR_PRODUK_2": "produk2.jpg",
+    "GAMBAR_PRODUK_3": "produk3.jpg",
+    "GAMBAR_PRODUK_4": "produk4.jpg",
+    "GAMBAR_PRODUK_5": "produk5.jpg",
+    "GAMBAR_PRODUK_6": "produk6.jpg",
+    "GAMBAR_PRODUK_7": "produk7.jpg",
+    "GAMBAR_PRODUK_8": "produk8.jpg",
+    "GAMBAR_PRODUK_9": "produk9.jpg",
+    "GAMBAR_PRODUK_10": "produk10.jpg",
+}
+
+for penanda, nama_file in daftar_gambar.items():
+    html_code = html_code.replace(penanda, baca_gambar(nama_file))
 
 components.html(
     html_code,
