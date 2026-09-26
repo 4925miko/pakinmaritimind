@@ -1730,16 +1730,16 @@ Catatan: ${isiCatatan}`;
 # Hubungkan setiap penanda foto di HTML dengan file di dalam folder images.
 # Jika nama foto Anda berbeda, cukup ubah bagian kanan saja.
 daftar_gambar = {
-    "GAMBAR_PRODUK_1": "produk1.jpg",
-    "GAMBAR_PRODUK_2": "produk2.jpg",
-    "GAMBAR_PRODUK_3": "produk3.jpg",
-    "GAMBAR_PRODUK_4": "produk4.jpg",
-    "GAMBAR_PRODUK_5": "produk5.jpg",
-    "GAMBAR_PRODUK_6": "produk6.jpg",
-    "GAMBAR_PRODUK_7": "produk7.jpg",
-    "GAMBAR_PRODUK_8": "produk8.jpg",
-    "GAMBAR_PRODUK_9": "produk9.jpg",
-    "GAMBAR_PRODUK_10": "produk10.jpg",
+    "GAMBAR_PRODUK_1": "produk1.JPG",
+    "GAMBAR_PRODUK_2": "produk2.JPG",
+    "GAMBAR_PRODUK_3": "produk3.JPG",
+    "GAMBAR_PRODUK_4": "produk4.JPG",
+    "GAMBAR_PRODUK_5": "produk5.JPG",
+    "GAMBAR_PRODUK_6": "produk6.JPG",
+    "GAMBAR_PRODUK_7": "produk7.JPG",
+    "GAMBAR_PRODUK_8": "produk8.JPG",
+    "GAMBAR_PRODUK_9": "produk9.JPG",
+    "GAMBAR_PRODUK_10": "produk10.JPG",
 }
 
 for penanda, nama_file in daftar_gambar.items():
