@@ -5,7 +5,7 @@ import mimetypes
 from pathlib import Path
 
 st.set_page_config(
-    page_title="PakinMaritimInd",
+    page_title="PT Nuha Berkah Abadi",
     page_icon="🌊",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -75,7 +75,7 @@ html_code = r'''<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PakinMaritimInd | Seafood Berkualitas</title>
+    <title>PT Nuha Berkah Abadi | Seafood & Fillet Frozen Premium</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1013,8 +1013,8 @@ html_code = r'''<!DOCTYPE html>
     <header class="navbar">
         <div class="container nav-content">
             <a href="#beranda" class="brand">
-                <span class="brand-icon">🌊</span>
-                PAKINMARITIMIND
+                <span class="brand-icon">NBA</span>
+                PT NUHA BERKAH ABADI
             </a>
 
             <button
@@ -1043,19 +1043,19 @@ html_code = r'''<!DOCTYPE html>
             <div>
                 <div class="eyebrow">
                     <span class="eyebrow-dot"></span>
-                    Seafood pilihan berkualitas
+                    Distributor seafood & fillet frozen premium
                 </div>
 
                 <h1>
-                    Seafood segar untuk
-                    <span>setiap kebutuhan.</span>
+                    Penyedia Utama Seafood &
+                    <span>Fillet Premium Beku (Frozen)</span>
                 </h1>
 
                 <p class="hero-description">
-                    PakinMaritimInd menyediakan pilihan seafood untuk kebutuhan
-                    rumah tangga, restoran, katering, dan usaha kuliner. Informasi
-                    produk disajikan dengan jelas, sedangkan ketersediaannya
-                    menyesuaikan hasil tangkapan yang diperoleh.
+                    PT Nuha Berkah Abadi menyediakan berbagai pilihan seafood beku
+                    dan produk fillet premium untuk hotel, restoran, katering,
+                    usaha kuliner, dan rumah tangga, didukung rantai pendingin
+                    yang andal.
                 </p>
 
                 <div class="hero-buttons">
@@ -1064,7 +1064,7 @@ html_code = r'''<!DOCTYPE html>
                     </a>
 
                     <a
-                        href="https://wa.me/6285872869460?text=Halo%20PakinMaritimInd,%20saya%20ingin%20menanyakan%20produk%20seafood."
+                        href="https://wa.me/6282220404770?text=Halo%20PT%20Nuha%20Berkah%20Abadi,%20saya%20ingin%20menanyakan%20produk%20seafood%20dan%20fillet%20frozen."
                         target="_blank"
                         class="button button-white"
                     >
@@ -1074,18 +1074,18 @@ html_code = r'''<!DOCTYPE html>
 
                 <div class="stats">
                     <div class="stat">
-                        <strong>10</strong>
-                        <span>Pilihan produk seafood</span>
+                        <strong>❄️</strong>
+                        <span>Rantai Pendingin Terjaga</span>
                     </div>
 
                     <div class="stat">
-                        <strong>Segar</strong>
-                        <span>Fokus pada kualitas produk</span>
+                        <strong>✓</strong>
+                        <span>Pilihan Premium Fresh Frozen</span>
                     </div>
 
                     <div class="stat">
-                        <strong>Cepat</strong>
-                        <span>Informasi melalui WhatsApp</span>
+                        <strong>🚚</strong>
+                        <span>Pengiriman Cepat via WhatsApp</span>
                     </div>
                 </div>
             </div>
@@ -1093,15 +1093,15 @@ html_code = r'''<!DOCTYPE html>
             <div class="featured-card">
                 <img
                     src="GAMBAR_PRODUK_1"
-                    alt="Udang Vaname"
+                    alt="Salmon Portion"
                 >
 
                 <div class="featured-content">
                     <span class="featured-label">PRODUK FAVORIT</span>
-                    <h3>Udang Vaname</h3>
+                    <h3>Salmon Portion</h3>
                     <p class="featured-description">
-                        Udang pilihan dengan tekstur padat dan rasa gurih,
-                        cocok untuk beragam hidangan seafood.
+                        Potongan salmon premium yang presisi, higienis,
+                        konsisten, dan praktis untuk sajian berkelas.
                     </p>
                 </div>
             </div>
@@ -1114,12 +1114,12 @@ html_code = r'''<!DOCTYPE html>
             <div class="section-header">
                 <div>
                     <div class="section-label">Katalog Produk</div>
-                    <h2 class="section-title">Pilihan seafood untuk pelanggan.</h2>
+                    <h2 class="section-title">Koleksi Produk Seafood & Ikan Premium Kami</h2>
                 </div>
 
                 <p class="section-description">
-                    Setiap produk ditampilkan melalui foto, nama, dan deskripsi
-                    singkat agar pengunjung mudah mengenal produk kami.
+                    Produk frozen premium yang praktis untuk kebutuhan HORECA,
+                    katering, usaha kuliner, dan rumah tangga.
                 </p>
             </div>
 
@@ -1129,17 +1129,19 @@ html_code = r'''<!DOCTYPE html>
                     <div class="product-image">
                         <img
                             src="GAMBAR_PRODUK_1"
-                            alt="Udang Vaname"
+                            alt="Salmon Portion"
                         >
                         <span class="badge">FAVORIT</span>
                     </div>
 
                     <div class="product-content">
-                        <span class="product-category">Udang</span>
-                        <h3>Udang Vaname</h3>
+                        <span class="product-category">Salmon Premium</span>
+                        <h3>Salmon Portion</h3>
                         <p>
-                            Tekstur padat dan rasa gurih. Cocok untuk grill,
-                            tumis, tempura, dan saus seafood.
+                            <strong>Potongan Presisi untuk Sajian Berkelas.</strong><br>
+                            Salmon premium yang dipotong presisi dan higienis,
+                            menghasilkan porsi konsisten. Kaya Omega-3 dengan tekstur
+                            juicy dan warna oranye alami yang segar.
                         </p>
                     </div>
                 </article>
@@ -1148,17 +1150,18 @@ html_code = r'''<!DOCTYPE html>
                     <div class="product-image">
                         <img
                             src="GAMBAR_PRODUK_2"
-                            alt="Cumi Segar"
+                            alt="Salmon Lempeng Slab"
                         >
-                        <span class="badge">FRESH</span>
+                        <span class="badge">EKONOMIS</span>
                     </div>
 
                     <div class="product-content">
-                        <span class="product-category">Cumi</span>
-                        <h3>Cumi Segar</h3>
+                        <span class="product-category">Salmon Premium</span>
+                        <h3>Salmon Lempeng (Slab)</h3>
                         <p>
-                            Daging kenyal dengan rasa gurih. Cocok untuk calamari,
-                            bakar, tumis, dan saus tiram.
+                            <strong>Fleksibilitas Tanpa Batas untuk Dapur Anda.</strong><br>
+                            Pilihan ekonomis dan serbaguna dalam potongan utuh
+                            memanjang, bebas dipotong menjadi dadu, irisan, atau steak.
                         </p>
                     </div>
                 </article>
@@ -1167,17 +1170,18 @@ html_code = r'''<!DOCTYPE html>
                     <div class="product-image">
                         <img
                             src="GAMBAR_PRODUK_3"
-                            alt="Fillet Salmon"
+                            alt="Dori Fillet BL"
                         >
                         <span class="badge">PREMIUM</span>
                     </div>
 
                     <div class="product-content">
-                        <span class="product-category">Ikan</span>
-                        <h3>Fillet Salmon</h3>
+                        <span class="product-category">Fillet Ikan</span>
+                        <h3>Dori Fillet BL (Blood Line)</h3>
                         <p>
-                            Tekstur lembut dan cita rasa khas. Cocok untuk grill,
-                            steak, sushi, dan menu sehat.
+                            <strong>Gurih Alami, Tekstur Lembut Sempurna.</strong><br>
+                            Blood line memberi cita rasa lebih gurih dan kuat.
+                            Dagingnya tebal, tidak mudah hancur, dan cocok untuk olahan berbumbu.
                         </p>
                     </div>
                 </article>
@@ -1186,17 +1190,18 @@ html_code = r'''<!DOCTYPE html>
                     <div class="product-image">
                         <img
                             src="GAMBAR_PRODUK_4"
-                            alt="Kerang Hijau"
+                            alt="Dori Fillet NBL"
                         >
                         <span class="badge">SEGAR</span>
                     </div>
 
                     <div class="product-content">
-                        <span class="product-category">Kerang</span>
-                        <h3>Kerang Hijau</h3>
+                        <span class="product-category">Fillet Ikan</span>
+                        <h3>Dori Fillet NBL (Non-Blood Line)</h3>
                         <p>
-                            Rasa gurih dan tekstur lembut. Cocok untuk saus padang,
-                            saus tiram, rebus, dan bakar.
+                            <strong>Kualitas Premium dengan Presentasi Putih Bersih.</strong><br>
+                            Blood line dibersihkan sepenuhnya, menyisakan fillet putih
+                            bersih dengan rasa lebih netral untuk hidangan elegan.
                         </p>
                     </div>
                 </article>
@@ -1205,17 +1210,18 @@ html_code = r'''<!DOCTYPE html>
                     <div class="product-image">
                         <img
                             src="GAMBAR_PRODUK_5"
-                            alt="Kepiting Bakau"
+                            alt="Nila Fillet"
                         >
                         <span class="badge">PREMIUM</span>
                     </div>
 
                     <div class="product-content">
-                        <span class="product-category">Kepiting</span>
-                        <h3>Kepiting Bakau</h3>
+                        <span class="product-category">Fillet Ikan</span>
+                        <h3>Nila Fillet</h3>
                         <p>
-                            Daging lezat dengan cita rasa kuat. Cocok untuk menu
-                            restoran dan olahan saus seafood.
+                            <strong>Protein Tinggi yang Ramah di Lidah.</strong><br>
+                            Daging padat, manis alami, bebas bau tanah, tinggi protein,
+                            rendah lemak, dan mudah menyerap bumbu Nusantara maupun Western.
                         </p>
                     </div>
                 </article>
@@ -1224,17 +1230,18 @@ html_code = r'''<!DOCTYPE html>
                     <div class="product-image">
                         <img
                             src="GAMBAR_PRODUK_6"
-                            alt="Fillet Dori"
+                            alt="Gurami Fillet"
                         >
                         <span class="badge">PRAKTIS</span>
                     </div>
 
                     <div class="product-content">
                         <span class="product-category">Fillet Ikan</span>
-                        <h3>Fillet Dori</h3>
+                        <h3>Gurami Fillet</h3>
                         <p>
-                            Fillet siap olah untuk fish and chips, goreng tepung,
-                            steak ikan, dan menu keluarga.
+                            <strong>Cita Rasa Lokal dalam Format Modern.</strong><br>
+                            Gurami hadir dalam bentuk fillet praktis tanpa repot
+                            menyisihkan duri halus, dengan daging empuk dan gurih.
                         </p>
                     </div>
                 </article>
@@ -1243,17 +1250,18 @@ html_code = r'''<!DOCTYPE html>
                     <div class="product-image">
                         <img
                             src="GAMBAR_PRODUK_7"
-                            alt="Tiram Segar"
+                            alt="Lele Fillet"
                         >
                         <span class="badge">SEGAR</span>
                     </div>
 
                     <div class="product-content">
-                        <span class="product-category">Tiram</span>
-                        <h3>Tiram Segar</h3>
+                        <span class="product-category">Fillet Ikan</span>
+                        <h3>Lele Fillet</h3>
                         <p>
-                            Pilihan untuk panggang, butter sauce, dan berbagai
-                            sajian seafood premium.
+                            <strong>Inovasi Olahan Ikan Lele Tanpa Repot.</strong><br>
+                            Daging bersih tanpa tulang dan patil, bertekstur lembut,
+                            bernutrisi tinggi, praktis, dan tampil lebih bersih.
                         </p>
                     </div>
                 </article>
@@ -1262,17 +1270,18 @@ html_code = r'''<!DOCTYPE html>
                     <div class="product-image">
                         <img
                             src="GAMBAR_PRODUK_8"
-                            alt="Seafood Mix"
+                            alt="Udang Kupas"
                         >
-                        <span class="badge">PAKET</span>
+                        <span class="badge">SIAP MASAK</span>
                     </div>
 
                     <div class="product-content">
-                        <span class="product-category">Mix Seafood</span>
-                        <h3>Seafood Mix</h3>
+                        <span class="product-category">Udang</span>
+                        <h3>Udang Kupas</h3>
                         <p>
-                            Kombinasi seafood pilihan untuk steamboat, hotpot,
-                            grill, dan menu keluarga.
+                            <strong>Segar, Kenyal, dan Siap Masak.</strong><br>
+                            Udang segar berkualitas yang langsung dikupas dan dibekukan.
+                            Teksturnya tetap renyah, manis, dan mempercepat proses memasak.
                         </p>
                     </div>
                 </article>
@@ -1282,16 +1291,18 @@ html_code = r'''<!DOCTYPE html>
                     <div class="product-image">
                         <img
                             src="GAMBAR_PRODUK_9"
-                            alt="Nama Produk 9"
+                            alt="Cumi Ring"
                         >
                         <span class="badge">SEGAR</span>
                     </div>
 
                     <div class="product-content">
-                        <span class="product-category">Kategori Produk</span>
-                        <h3>Nama Produk 9</h3>
+                        <span class="product-category">Cumi</span>
+                        <h3>Cumi Ring</h3>
                         <p>
-                            Tuliskan keterangan produk ke-9 di bagian ini.
+                            <strong>Potongan Calamari Sempurna Setiap Saat.</strong><br>
+                            Dipotong melingkar dengan ketebalan pas, dibersihkan
+                            secara saksama, dan bertekstur kenyal bila dimasak tepat.
                         </p>
                     </div>
                 </article>
@@ -1301,16 +1312,18 @@ html_code = r'''<!DOCTYPE html>
                     <div class="product-image">
                         <img
                             src="GAMBAR_PRODUK_10"
-                            alt="Nama Produk 10"
+                            alt="Cumi Flower"
                         >
                         <span class="badge">PREMIUM</span>
                     </div>
 
                     <div class="product-content">
-                        <span class="product-category">Kategori Produk</span>
-                        <h3>Nama Produk 10</h3>
+                        <span class="product-category">Cumi</span>
+                        <h3>Cumi Flower</h3>
                         <p>
-                            Tuliskan keterangan produk ke-10 di bagian ini.
+                            <strong>Cantik Mekar, Bumbu Meresap Sempurna.</strong><br>
+                            Disayat silang secara profesional agar mekar saat dimasak.
+                            Bentuknya cantik sekaligus membantu saus meresap maksimal.
                         </p>
                     </div>
                 </article>
@@ -1328,38 +1341,45 @@ html_code = r'''<!DOCTYPE html>
     <section class="section about" id="tentang">
         <div class="container about-grid">
             <div>
-                <div class="section-label">Tentang PakinMaritimInd</div>
+                <div class="section-label">Tentang PT Nuha Berkah Abadi</div>
 
                 <h2 class="section-title">
-                    Lebih mudah memilih seafood sesuai kebutuhan.
+                    Distributor Terpercaya Seafood & Fillet Frozen Premium
                 </h2>
 
                 <p class="about-text">
-                    PakinMaritimInd menghadirkan bahan makanan laut dengan
-                    informasi produk yang jelas agar pelanggan dapat memilih
-                    dengan cepat dan nyaman. Produk cocok untuk kebutuhan
-                    rumah tangga maupun pelanggan usaha kuliner.
+                    PT Nuha Berkah Abadi adalah perusahaan distributor yang
+                    berdedikasi menyediakan seafood dan ikan fillet frozen
+                    berkualitas premium. Kami hadir sebagai solusi pasokan protein
+                    perairan yang praktis, segar, dan berstandar tinggi untuk
+                    HORECA, katering, usaha kuliner, dan dapur rumahan.
+                    <br><br>
+                    <strong>Komitmen pada Kualitas & Keamanan Pangan</strong><br>
+                    Seluruh produk diproses, disimpan, dan didistribusikan dengan
+                    sistem rantai dingin yang ketat. Suhu stabil membantu mengunci
+                    nutrisi, mempertahankan tekstur, serta menjaga produk tetap
+                    aman dan higienis hingga diterima pelanggan.
                 </p>
 
                 <div class="about-list">
                     <div class="about-item">
                         <span class="check">✓</span>
-                        Informasi produk jelas
+                        Suhu produk stabil
                     </div>
 
                     <div class="about-item">
                         <span class="check">✓</span>
-                        Deskripsi produk mudah dipahami
+                        Nutrisi dan tekstur terjaga
                     </div>
 
                     <div class="about-item">
                         <span class="check">✓</span>
-                        Informasi mudah ditanyakan
+                        Aman dan higienis
                     </div>
 
                     <div class="about-item">
                         <span class="check">✓</span>
-                        Cocok untuk usaha kuliner
+                        Pasokan untuk bisnis & keluarga
                     </div>
                 </div>
             </div>
@@ -1377,50 +1397,50 @@ html_code = r'''<!DOCTYPE html>
         <div class="container">
             <div class="section-header">
                 <div>
-                    <div class="section-label">Kenapa Memilih Kami</div>
-                    <h2 class="section-title">Pelayanan mudah dan terpercaya.</h2>
+                    <div class="section-label">Keunggulan Kami</div>
+                    <h2 class="section-title">Mengapa Memilih PT Nuha Berkah Abadi?</h2>
                 </div>
 
                 <p class="section-description">
-                    Kami memberikan informasi produk dan jalur komunikasi
-                    yang mudah untuk membantu kebutuhan pelanggan.
+                    Kualitas, keamanan pangan, kepraktisan, dan fleksibilitas
+                    pasokan menjadi dasar pelayanan kami.
                 </p>
             </div>
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🐟</div>
-                    <h3>Pilihan Produk</h3>
-                    <p>
-                        Beragam kategori seafood untuk menyesuaikan kebutuhan
-                        rumah tangga dan usaha.
-                    </p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🌊</div>
-                    <h3>Hasil Tangkapan</h3>
-                    <p>
-                        Ketersediaan produk diinformasikan sesuai hasil tangkapan
-                        dan kondisi stok terbaru.
-                    </p>
-                </div>
-
-                <div class="feature-card">
                     <div class="feature-icon">✓</div>
-                    <h3>Fokus Kualitas</h3>
+                    <h3>Kualitas Premium</h3>
                     <p>
-                        Kualitas dan penanganan produk menjadi bagian penting
-                        dalam pelayanan.
+                        Menyediakan pilihan seafood dan fillet ikan unggulan
+                        yang diseleksi secara ketat.
                     </p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">💬</div>
-                    <h3>Mudah Dihubungi</h3>
+                    <div class="feature-icon">❄️</div>
+                    <h3>Sistem Rantai Dingin</h3>
                     <p>
-                        Pelanggan dapat menanyakan jenis, ukuran, ketersediaan,
-                        dan informasi produk melalui WhatsApp.
+                        Menjaga produk tetap aman, higienis, dan tidak turun mutu
+                        selama penyimpanan hingga distribusi.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🍽️</div>
+                    <h3>Praktis & Efisien</h3>
+                    <p>
+                        Produk siap olah yang menghemat waktu persiapan di dapur
+                        komersial maupun rumah tangga.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Kapasitas Pasokan Fleksibel</h3>
+                    <p>
+                        Siap memenuhi partai besar untuk bisnis dan katering
+                        maupun skala kecil untuk kebutuhan keluarga.
                     </p>
                 </div>
             </div>
@@ -1446,20 +1466,19 @@ html_code = r'''<!DOCTYPE html>
                     <div class="contact">
                         <div class="contact-label">WhatsApp</div>
                         <a
-                            href="https://wa.me/6285872869460"
+                            href="https://wa.me/6282220404770"
                             target="_blank"
                         >
-                            +62 858-7286-9460
+                            0822-2040-4770
                         </a>
                     </div>
 
                     <div class="contact">
-                        <div class="contact-label">Instagram</div>
+                        <div class="contact-label">Email</div>
                         <a
-                            href="https://instagram.com/pakinmaritimind"
-                            target="_blank"
+                            href="mailto:nuhaberkahabadi@gmail.com"
                         >
-                            @pakinmaritimind
+                            nuhaberkahabadi@gmail.com
                         </a>
                     </div>
                 </div>
@@ -1483,16 +1502,16 @@ html_code = r'''<!DOCTYPE html>
                             <label for="produkPilihan">Produk</label>
                             <select id="produkPilihan" name="produk">
                                 <option value="">Pilih produk</option>
-                                <option value="Udang Vaname">Udang Vaname</option>
-                                <option value="Cumi Segar">Cumi Segar</option>
-                                <option value="Fillet Salmon">Fillet Salmon</option>
-                                <option value="Kerang Hijau">Kerang Hijau</option>
-                                <option value="Kepiting Bakau">Kepiting Bakau</option>
-                                <option value="Fillet Dori">Fillet Dori</option>
-                                <option value="Tiram Segar">Tiram Segar</option>
-                                <option value="Seafood Mix">Seafood Mix</option>
-                                <option value="Nama Produk 9">Nama Produk 9</option>
-                                <option value="Nama Produk 10">Nama Produk 10</option>
+                                <option value="Salmon Portion">Salmon Portion</option>
+                                <option value="Salmon Lempeng (Slab)">Salmon Lempeng (Slab)</option>
+                                <option value="Dori Fillet BL">Dori Fillet BL</option>
+                                <option value="Dori Fillet NBL">Dori Fillet NBL</option>
+                                <option value="Nila Fillet">Nila Fillet</option>
+                                <option value="Gurami Fillet">Gurami Fillet</option>
+                                <option value="Lele Fillet">Lele Fillet</option>
+                                <option value="Udang Kupas">Udang Kupas</option>
+                                <option value="Cumi Ring">Cumi Ring</option>
+                                <option value="Cumi Flower">Cumi Flower</option>
                             </select>
                         </div>
 
@@ -1537,12 +1556,12 @@ html_code = r'''<!DOCTYPE html>
     <footer>
         <div class="container footer-content">
             <div>
-                © 2026 <strong>PakinMaritimInd</strong>.
-                Seafood dan bahan makanan laut.
+                © 2026 <strong>PT Nuha Berkah Abadi</strong>.
+                Seafood dan fillet frozen premium.
             </div>
 
             <div>
-                            Website promosi dan informasi produk
+                Distributor seafood & fillet frozen premium
             </div>
         </div>
     </footer>
@@ -1646,10 +1665,10 @@ html_code = r'''<!DOCTYPE html>
         KONFIGURASI NOMOR WHATSAPP
         =====================================================
 
-        Nomor 0858-7286-9460 ditulis menjadi 6285872869460.
+        Nomor 0822-2040-4770 ditulis menjadi 6282220404770.
         Jangan menggunakan tanda +, spasi, atau tanda strip.
         */
-        const nomorWhatsApp = "6285872869460";
+        const nomorWhatsApp = "6282220404770";
 
         /*
         =====================================================
@@ -1742,16 +1761,12 @@ daftar_gambar = {
     "GAMBAR_PRODUK_10": "produk10baru.JPG",
 }
 
-# Urutkan penanda terpanjang agar produk 10 diproses sebelum produk 1
 for penanda in sorted(daftar_gambar, key=len, reverse=True):
     nama_file = daftar_gambar[penanda]
-    html_code = html_code.replace(
-        penanda,
-        baca_gambar(nama_file)
-    )
+    html_code = html_code.replace(penanda, baca_gambar(nama_file))
+
 components.html(
     html_code,
     height=900,
     scrolling=True,
 )
-
