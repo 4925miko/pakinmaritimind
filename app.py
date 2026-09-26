@@ -1742,9 +1742,13 @@ daftar_gambar = {
     "GAMBAR_PRODUK_10": "produk10baru.JPG",
 }
 
-for penanda, nama_file in daftar_gambar.items():
-    html_code = html_code.replace(penanda, baca_gambar(nama_file))
-
+# Urutkan penanda terpanjang agar produk 10 diproses sebelum produk 1
+for penanda in sorted(daftar_gambar, key=len, reverse=True):
+    nama_file = daftar_gambar[penanda]
+    html_code = html_code.replace(
+        penanda,
+        baca_gambar(nama_file)
+    )
 components.html(
     html_code,
     height=900,
