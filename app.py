@@ -1749,16 +1749,16 @@ Catatan: ${isiCatatan}`;
 # Hubungkan setiap penanda foto di HTML dengan file di dalam folder images.
 # Jika nama foto Anda berbeda, cukup ubah bagian kanan saja.
 daftar_gambar = {
-    "GAMBAR_PRODUK_1": "produk1.JPG",
-    "GAMBAR_PRODUK_2": "produk2.JPG",
-    "GAMBAR_PRODUK_3": "produk3.JPG",
-    "GAMBAR_PRODUK_4": "produk4.JPG",
-    "GAMBAR_PRODUK_5": "produk5.JPG",
-    "GAMBAR_PRODUK_6": "produk6.JPG",
-    "GAMBAR_PRODUK_7": "produk7.JPG",
-    "GAMBAR_PRODUK_8": "produk8.JPG",
-    "GAMBAR_PRODUK_9": "produk9.JPG",
-    "GAMBAR_PRODUK_10": "produk10baru.JPG",
+    "GAMBAR_PRODUK_1": "salmon-portion.jpg",
+    "GAMBAR_PRODUK_2": "salmon-lempeng.jpg",
+    "GAMBAR_PRODUK_3": "dori-fillet-bl.jpg",
+    "GAMBAR_PRODUK_4": "dori-fillet-nbl.jpg",
+    "GAMBAR_PRODUK_5": "nila-fillet.jpg",
+    "GAMBAR_PRODUK_6": "gurami-fillet.jpg",
+    "GAMBAR_PRODUK_7": "lele-fillet.jpg",
+    "GAMBAR_PRODUK_8": "udang-kupas.jpg",
+    "GAMBAR_PRODUK_9": "cumi-ring.jpg",
+    "GAMBAR_PRODUK_10": "cumi-flower.jpg",
 }
 
 for penanda in sorted(daftar_gambar, key=len, reverse=True):
