@@ -1,8 +1,10 @@
-import streamlit as st
-import streamlit.components.v1 as components
 import base64
 import mimetypes
 from pathlib import Path
+
+import streamlit as st
+import streamlit.components.v1 as components
+
 
 st.set_page_config(
     page_title="PT Nuha Berkah Abadi",
@@ -11,7 +13,8 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-# Menyembunyikan elemen bawaan Streamlit agar tampil seperti website biasa.
+
+# Menyembunyikan tampilan bawaan Streamlit.
 st.markdown(
     """
     <style>
@@ -19,10 +22,7 @@ st.markdown(
         header {visibility: hidden;}
         footer {visibility: hidden;}
         .stApp {background: #ffffff;}
-        .block-container {
-            max-width: 100%;
-            padding: 0;
-        }
+        .block-container,
         [data-testid="stAppViewContainer"],
         [data-testid="stMain"],
         .stMainBlockContainer {
@@ -41,94 +41,80 @@ st.markdown(
 )
 
 
-# FOTO PRODUK
-# Buat folder bernama "images" di samping file ini, lalu masukkan
-# produk1.jpg sampai produk10.jpg. Nama file dapat diubah pada
-# daftar_gambar yang berada di bagian bawah kode.
-def baca_gambar(nama_file):
+def normalisasi_nama(nama):
+    """Abaikan perbedaan kapital, spasi, tanda hubung, dan ekstensi."""
+    nama_tanpa_ekstensi = Path(nama).stem
+    return "".join(
+        karakter.lower()
+        for karakter in nama_tanpa_ekstensi
+        if karakter.isalnum()
+    )
+
+
+@st.cache_data(show_spinner=False)
+def baca_gambar(nama_file, nama_cadangan=None):
+    """Membaca gambar dari folder images dan mengubahnya menjadi data URL."""
     folder_gambar = Path(__file__).parent / "images"
     lokasi = folder_gambar / nama_file
 
-    # Normalisasi nama: abaikan kapital, spasi, tanda hubung, dan ekstensi
-    def normalisasi(nama):
-        nama_tanpa_ekstensi = Path(nama).stem
-        return "".join(
-            karakter.lower()
-            for karakter in nama_tanpa_ekstensi
-            if karakter.isalnum()
-        )
-
-    # Jika nama persis tidak ditemukan, cari nama yang mirip
+    # Cari nama yang mirip jika nama persis tidak ditemukan.
     if not lokasi.exists() and folder_gambar.exists():
-        nama_dicari = normalisasi(nama_file)
+        nama_dicari = normalisasi_nama(nama_file)
 
         for file_gambar in folder_gambar.iterdir():
-            if file_gambar.is_file():
-                if normalisasi(file_gambar.name) == nama_dicari:
-                    lokasi = file_gambar
-                    break
+            if (
+                file_gambar.is_file()
+                and normalisasi_nama(file_gambar.name) == nama_dicari
+            ):
+                lokasi = file_gambar
+                break
 
-    # Gambar cadangan jika file benar-benar tidak ditemukan
+    # Gunakan gambar cadangan bila gambar utama belum ada.
+    if not lokasi.exists() and nama_cadangan:
+        lokasi_cadangan = folder_gambar / nama_cadangan
+
+        if lokasi_cadangan.exists():
+            lokasi = lokasi_cadangan
+
+    # Placeholder apabila gambar tidak ditemukan.
     if not lokasi.exists():
-        svg = f'''
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="900"
-             height="600">
-
-            <rect width="100%"
-                  height="100%"
-                  fill="#eefaff"/>
-
-            <text x="50%"
-                  y="48%"
-                  text-anchor="middle"
-                  fill="#2396c4"
-                  font-family="Arial"
-                  font-size="34"
-                  font-weight="bold">
+        svg = f"""
+        <svg xmlns="http://www.w3.org/2000/svg" width="900" height="600">
+            <rect width="100%" height="100%" fill="#eefaff"/>
+            <text x="50%" y="48%" text-anchor="middle"
+                  fill="#2396c4" font-family="Arial"
+                  font-size="34" font-weight="bold">
                 Foto belum tersedia
             </text>
-
-            <text x="50%"
-                  y="57%"
-                  text-anchor="middle"
-                  fill="#698b9b"
-                  font-family="Arial"
-                  font-size="22">
+            <text x="50%" y="57%" text-anchor="middle"
+                  fill="#698b9b" font-family="Arial" font-size="22">
                 {nama_file}
             </text>
         </svg>
-        '''
-
-        data = base64.b64encode(
-            svg.encode("utf-8")
-        ).decode("utf-8")
-
+        """
+        data = base64.b64encode(svg.encode("utf-8")).decode("utf-8")
         return f"data:image/svg+xml;base64,{data}"
 
-    tipe, _ = mimetypes.guess_type(lokasi)
-
-    # Deteksi tipe gambar berdasarkan ekstensi
     ekstensi = lokasi.suffix.lower()
 
-    if ekstensi in [".jpg", ".jpeg"]:
+    if ekstensi in (".jpg", ".jpeg"):
         tipe = "image/jpeg"
     elif ekstensi == ".png":
         tipe = "image/png"
     elif ekstensi == ".webp":
         tipe = "image/webp"
+    elif ekstensi == ".gif":
+        tipe = "image/gif"
     else:
-        tipe = tipe or "image/jpeg"
+        tipe = mimetypes.guess_type(lokasi)[0] or "application/octet-stream"
 
-    with open(lokasi, "rb") as file:
-        data = base64.b64encode(
-            file.read()
-        ).decode("utf-8")
-
+    data = base64.b64encode(lokasi.read_bytes()).decode("utf-8")
     return f"data:{tipe};base64,{data}"
 
-# Seluruh tampilan website HTML ditanam langsung di dalam aplikasi Streamlit.
-html_code = r'''<!DOCTYPE html>
+
+# Seluruh tampilan website ditulis langsung di dalam app.py.
+# Anda dapat mengubah teks, warna, alamat, dan bagian lain langsung di bawah ini.
+html_code = r"""<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -227,24 +213,15 @@ html_code = r'''<!DOCTYPE html>
         }
 
         .brand-icon {
-    width: 48px;
-    height: 48px;
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 7px;
-    border-radius: 14px;
-    color: var(--white);
-    background: linear-gradient(135deg, var(--blue), var(--cyan));
-    box-shadow: 0 8px 20px rgba(36, 127, 159, 0.22);
-}
-
-.brand-icon svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
+            width: 58px;
+            height: 58px;
+            flex-shrink: 0;
+            display: block;
+            object-fit: contain;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 8px 20px rgba(9, 74, 103, 0.2);
+        }
 
         .nav-links {
             display: flex;
@@ -748,6 +725,42 @@ html_code = r'''<!DOCTYPE html>
             text-decoration: none;
         }
 
+        .contact-address {
+            margin: 0;
+            color: white !important;
+            font-size: 13px !important;
+            font-weight: 600;
+            line-height: 1.65 !important;
+        }
+
+        .contact-map {
+            width: 100%;
+            height: 180px;
+            margin-top: 12px;
+            display: block;
+            border: 0;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .map-link {
+            margin-top: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 13px;
+            border: 1px solid rgba(255, 255, 255, 0.36);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.13);
+            font-size: 12px !important;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .map-link:hover {
+            background: rgba(255, 255, 255, 0.22);
+            transform: translateY(-1px);
+        }
+
         .order-form {
             padding: 34px 32px;
         }
@@ -920,10 +933,8 @@ html_code = r'''<!DOCTYPE html>
             }
 
             .brand-icon {
-                width: 36px;
-                height: 36px;
-                border-radius: 11px;
-                font-size: 18px;
+                width: 43px;
+                height: 43px;
             }
 
             .hero {
@@ -1082,25 +1093,11 @@ html_code = r'''<!DOCTYPE html>
     <header class="navbar">
         <div class="container nav-content">
             <a href="#beranda" class="brand">
-                <span class="brand-icon" aria-label="Logo Nuha Berkah Abadi">
-    <svg viewBox="0 0 64 64" aria-hidden="true">
-        <path
-            d="M13 32c9-12 23-16 35-7l9-7v28l-9-7c-12 9-26 5-35-7Z"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="4"
-            stroke-linejoin="round"
-        />
-        <circle cx="39" cy="28" r="2.5" fill="currentColor"/>
-        <path
-            d="M8 48c10-5 18 5 28 0s18 5 24 0"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="4"
-            stroke-linecap="round"
-        />
-    </svg>
-</span>
+                <img
+                    class="brand-icon"
+                    src="data:image/webp;base64,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"
+                    alt="Logo PT Nuha Berkah Abadi"
+                >
                 PT NUHA BERKAH ABADI
             </a>
 
@@ -1179,7 +1176,7 @@ html_code = r'''<!DOCTYPE html>
 
             <div class="featured-card">
                 <img
-                    src="GAMBAR_PRODUK_1"
+                    src="images/salmon-portion.jpg"
                     alt="Salmon Portion"
                 >
 
@@ -1215,7 +1212,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="GAMBAR_PRODUK_1"
+                            src="images/salmon-portion.jpg"
                             alt="Salmon Portion"
                         >
                         <span class="badge">FAVORIT</span>
@@ -1236,7 +1233,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="GAMBAR_PRODUK_2"
+                            src="images/salmon-lempeng.jpg"
                             alt="Salmon Lempeng Slab"
                         >
                         <span class="badge">EKONOMIS</span>
@@ -1256,7 +1253,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="GAMBAR_PRODUK_3"
+                            src="images/dori-fillet-bl.jpg"
                             alt="Dori Fillet BL"
                         >
                         <span class="badge">PREMIUM</span>
@@ -1276,7 +1273,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="GAMBAR_PRODUK_4"
+                            src="images/dori-fillet-nbl.jpg"
                             alt="Dori Fillet NBL"
                         >
                         <span class="badge">SEGAR</span>
@@ -1296,7 +1293,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="GAMBAR_PRODUK_5"
+                            src="images/nila-fillet.jpg"
                             alt="Nila Fillet"
                         >
                         <span class="badge">PREMIUM</span>
@@ -1316,7 +1313,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="GAMBAR_PRODUK_6"
+                            src="images/gurami-fillet.jpg"
                             alt="Gurami Fillet"
                         >
                         <span class="badge">PRAKTIS</span>
@@ -1336,7 +1333,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="GAMBAR_PRODUK_7"
+                            src="images/lele-fillet.jpg"
                             alt="Lele Fillet"
                         >
                         <span class="badge">SEGAR</span>
@@ -1356,7 +1353,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="GAMBAR_PRODUK_8"
+                            src="images/udang-kupas.jpg"
                             alt="Udang Kupas"
                         >
                         <span class="badge">SIAP MASAK</span>
@@ -1377,7 +1374,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="GAMBAR_PRODUK_9"
+                            src="images/cumi-ring.jpg"
                             alt="Cumi Ring"
                         >
                         <span class="badge">SEGAR</span>
@@ -1398,7 +1395,7 @@ html_code = r'''<!DOCTYPE html>
                 <article class="product-card">
                     <div class="product-image">
                         <img
-                            src="GAMBAR_PRODUK_10"
+                            src="images/cumi-flower.jpg"
                             alt="Cumi Flower"
                         >
                         <span class="badge">PREMIUM</span>
@@ -1473,8 +1470,9 @@ html_code = r'''<!DOCTYPE html>
 
             <img
                 class="about-image"
-                src="GAMBAR_PRODUK_10"
+                src="images/tentang-perusahaan.jpg"
                 alt="Seafood dan fillet frozen PT Nuha Berkah Abadi"
+                loading="lazy"
             >
         </div>
     </section>
@@ -1566,6 +1564,33 @@ html_code = r'''<!DOCTYPE html>
                             href="mailto:nuhaberkahabadi@gmail.com"
                         >
                             nuhaberkahabadi@gmail.com
+                        </a>
+                    </div>
+
+                    <div class="contact">
+                        <div class="contact-label">Alamat</div>
+                        <p class="contact-address">
+                            Jl. Bantul No. KM 4, Kweni, Panggungharjo,
+                            Kec. Sewon, Kota Yogyakarta, Daerah Istimewa
+                            Yogyakarta 55188
+                        </p>
+
+                        <iframe
+                            class="contact-map"
+                            src="https://www.google.com/maps?q=-7.8332465,110.3532744&amp;z=17&amp;output=embed"
+                            title="Lokasi PT Nuha Berkah Abadi"
+                            loading="lazy"
+                            allowfullscreen
+                            referrerpolicy="no-referrer-when-downgrade"
+                        ></iframe>
+
+                        <a
+                            class="map-link"
+                            href="https://www.google.com/maps/search/?api=1&amp;query=-7.8332465,110.3532744"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            📍 Buka di Google Maps
                         </a>
                     </div>
                 </div>
@@ -1831,26 +1856,38 @@ Catatan: ${isiCatatan}`;
 
 </body>
 </html>
-'''
+"""
 
-# Hubungkan setiap penanda foto di HTML dengan file di dalam folder images.
-# Jika nama foto Anda berbeda, cukup ubah bagian kanan saja.
+
+# Hubungkan gambar dalam HTML dengan file produk di folder images.
 daftar_gambar = {
-    "GAMBAR_PRODUK_1": "salmon-portion.jpg",
-    "GAMBAR_PRODUK_2": "salmon-lempeng.jpg",
-    "GAMBAR_PRODUK_3": "dori-fillet-bl.jpg",
-    "GAMBAR_PRODUK_4": "dori-fillet-nbl.jpg",
-    "GAMBAR_PRODUK_5": "nila-fillet.jpg",
-    "GAMBAR_PRODUK_6": "gurami-fillet.jpg",
-    "GAMBAR_PRODUK_7": "lele-fillet.jpg",
-    "GAMBAR_PRODUK_8": "udang-kupas.jpg",
-    "GAMBAR_PRODUK_9": "cumi-ring.jpg",
-    "GAMBAR_PRODUK_10": "cumi-flower.jpg",
+    "images/salmon-portion.jpg": ("salmon-portion.jpg", None),
+    "images/salmon-lempeng.jpg": ("salmon-lempeng.jpg", None),
+    "images/dori-fillet-bl.jpg": ("dori-fillet-bl.jpg", None),
+    "images/dori-fillet-nbl.jpg": ("dori-fillet-nbl.jpg", None),
+    "images/nila-fillet.jpg": ("nila-fillet.jpg", None),
+    "images/gurami-fillet.jpg": ("gurami-fillet.jpg", None),
+    "images/lele-fillet.jpg": ("lele-fillet.jpg", None),
+    "images/udang-kupas.jpg": ("udang-kupas.jpg", None),
+    "images/cumi-ring.jpg": ("cumi-ring.jpg", None),
+    "images/cumi-flower.jpg": ("cumi-flower.jpg", None),
+
+    # Jika foto khusus Tentang Kami belum ada, gunakan Cumi Flower.
+    "images/tentang-perusahaan.jpg": (
+        "tentang-perusahaan.jpg",
+        "cumi-flower.jpg",
+    ),
 }
 
-for penanda in sorted(daftar_gambar, key=len, reverse=True):
-    nama_file = daftar_gambar[penanda]
-    html_code = html_code.replace(penanda, baca_gambar(nama_file))
+
+for alamat_html in sorted(daftar_gambar, key=len, reverse=True):
+    nama_file, nama_cadangan = daftar_gambar[alamat_html]
+
+    html_code = html_code.replace(
+        alamat_html,
+        baca_gambar(nama_file, nama_cadangan),
+    )
+
 
 components.html(
     html_code,
